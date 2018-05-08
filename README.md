@@ -1,26 +1,38 @@
-information at http://users.cs.dal.ca/~vlado/srcperl/Ngrams/Ngrams.html
+This fork is a slight adaptation of work by Zheyuan Yu to generate output in a comma separated value format.
 
-### How to use it:
+Original Repository: https://github.com/jerry2yu/ngrams
 
-1. download and save the source code.
+## How to use it:
 
-2. $ make
+1. Download and save the source code in a directory
+2. Execute `make` in that directory
 
-3. $ ngrams --type=word --n=3 --in= sample.txt
+## Using from Command Line
 
-     or 
+Get word Ngrams
 
-   $ ngrams --type=character -n=3 --in= sample.txt 
+```bash
+./ngrams --type=word --n=3 --in= sample.txt > sample.csv
+```
 
-     or
+Get character Ngrams
+```
+./ngrams --type=character -n=3 --in= sample.txt > sample.csv
+```
 
-   Byte ngrams, e.g., getting ngrams from binary file.
 
-   $ ngrams --type=byte -n=3 --in= sample.txt 
+Get byte Ngrams e.g., getting ngrams from binary file.
+
+```
+./ngrams --type=byte -n=3 --in= sample.txt > sample.csv
+```
+
+## Using from `R`
+
++ Unless you installed `ngrams` in `/bin` _(Which I'm not sure I'd recommend)_ the path for the `ngrams` command needs to be defined relative to the current `R` working directory or as an absolute path
++ Similarly, the `--in` and `stdout` paths also need to be defined relative to the current `R` working directory or as an absolute path
 
 
-That's it.
-
-If you found any bug or have any suggestion, please kindly send me email jerryy@gmail.com. Thanks.
-
-Zheyuan Yu. Feb 18,2006
+```r
+system2(command = "ngrams/ngrams",args = "--type=word --n = 3 --in sample.txt", stdout = "sample.csv")
+```
