@@ -180,9 +180,7 @@ void WordNgrams::output()
 {
   int ngramN = this->getN();
   
-  printf("BEGIN OUTPUT\n");
-  printf("Total %d unique ngram in %d ngrams.\n", this->count(), this->total() );
-  fprintf( stderr, "Total %d unique ngram in %d ngrams.\n", this->count(), this->total() );
+  printf("Ngrams , Frequency , Token\n");
   
   for ( int i=1; i<=ngramN; i++ )
   {
@@ -190,24 +188,19 @@ void WordNgrams::output()
     Vector< NgramToken * > ngramVector;
     this->getNgrams( ngramVector, i );
     
-    printf("\n%d-GRAMS\n", i);
-    printf("Total %d unique ngrams in %d %d-grams.\n", this->count( i ), this->total( i ), i );
-    fprintf( stderr, "Total %d unique ngrams in %d %d-grams.\n", this->count( i ), this->total( i ), i );
-    printf("------------------------\n");
-    
     size_t count = ngramVector.count();
     ngramVector.sort( INgrams::compareFunction );
     
     for ( unsigned j=0; j < count; j++ )
     {
       NgramToken * ngramToken = ngramVector[ j ];
-      //outputWordNgram( ngramToken.ngram, ngramToken.value.frequency, i );
-      printf("%s\t%d\n", ngramToken->ngram.c_str(), ngramToken->value.frequency );
+      printf("%d , %d ,%s\n", i ,ngramToken->value.frequency, ngramToken->ngram.c_str() );
       delete ngramToken;
     }
   }
   
 }
+
 
 void WordNgrams::getNgrams( vector< NgramToken * > & ngramVector, int n )
 {
